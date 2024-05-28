@@ -14,8 +14,8 @@
                {% for reservation in reservations %}
                    {% if reservation.idProfile is not null %}
                        {
-                            title: 'Réservation de {{ reservation.idProfile.firstName }}',
-                            start: '{{ reservation.date|date('Y-m-d') }}T{{ reservation.startTime|date('H:i:s') }}'
+                            title: 'Réservation de {{ reservation.idProfile.nom }}',
+                            start: '{{ reservation.bookAt|date('Y-m-d\TH:i:s') }}'
                        },
                    {% endif %}
                {% endfor %}

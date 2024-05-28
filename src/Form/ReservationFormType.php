@@ -16,10 +16,12 @@ class ReservationFormType extends AbstractType
     {
         $builder
             ->add('bookAt', null, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'label' => 'Date et Heure',
             ])
             ->add('idDiscipline', EntityType::class, [
                 'class' => Discipline::class,
+                'label' => 'Activité',
 'choice_label' => 'nom'
             ])
         ;

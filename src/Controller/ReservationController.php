@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use DateTime;
+use DateTimeImmutable;
 use App\Entity\Reservation;
 use App\Form\ReservationFormType;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Loader\Configurator\mailer;
 
 class ReservationController extends AbstractController
 {
@@ -52,7 +53,7 @@ class ReservationController extends AbstractController
             $user = $this->getUser();
             if ($user === null) {
                 $this->addFlash('danger', 'Vous devez être connecté pour faire une réservation.');
-                return $this->redirectToRoute('app_login'); // Rediriger vers la page de connexion ou une autre page appropriée
+                return $this->redirectToRoute('app_profile'); // Rediriger vers la page de connexion ou une autre page appropriée
             }
         
             $profile = $user->getProfile();
@@ -66,7 +67,7 @@ class ReservationController extends AbstractController
             // Vérifier s'il existe une réservation pour cette heure
             $existingReservation = $entityManager->getRepository(Reservation::class)->findOneBy(['date' => $date]);
             if ($existingReservation) {
-                $this->addFlash('danger', 'Il y a déjà une réservation pour cette heure.');
+                $this->addFlash('danger', 'Il y a déjà une réservation pour cette date.');
                 return $this->redirectToRoute('app_reservation_new');
             }
         
@@ -74,9 +75,22 @@ class ReservationController extends AbstractController
             $entityManager->persist($reservation);
             $entityManager->flush();
         
-            $this->addFlash('success', 'Réservation effectuée avec succès.');
-            return $this->redirectToRoute('app_reservation_list');
+            // Envoyer l'email de confirmation
+           // Remplacez 'votre@adresse.email' par l'adresse email de destination
+            $email = (new Email())
+            ->from('votre@adresse.email')
+            ->to($user->getEmail())
+            ->subject('Confirmation de réservation')
+            ->text('Votre réservation a bien été prise en compte.');
+
+            $mailer->send($email);
+
+        // Ajouter un message de confirmation
+        $this->addFlash('success', 'Réservation effectuée avec succès. Un email de confirmation vous a été envoyé.');
+
+        return $this->redirectToRoute('app_profile');
         }
+        
         
 
 
@@ -105,7 +119,7 @@ class ReservationController extends AbstractController
                 return $this->redirectToRoute('app_reservation_new');
             }
 
-            // Vérifier si l'heure de début est valide (9h, 10h, 11h)
+           
            
 
             // Si tout est valide, enregistrer la réservation

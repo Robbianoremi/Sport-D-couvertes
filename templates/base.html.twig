@@ -13,6 +13,9 @@
         {% endblock %}
     </head>
     <body>
+        {{ include('component/message.html.twig') }}
+        {{ include('component/menu.html.twig') }}
+
         {% block body %}{% endblock %}
     </body>
 </html>

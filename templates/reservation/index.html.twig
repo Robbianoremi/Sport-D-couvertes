@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReservationController!{% endblock %}
+
+
+{% block javascripts %}
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.12/index.global.min.js'></script>
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+       let calendarEl = document.querySelector('#calendar');
+       let calendar = new FullCalendar.Calendar(calendarEl, {
+           initialView: 'dayGridMonth',
+           events: [
+               {% for reservation in reservations %}
+                   {% if reservation.idProfile is not null %}
+                       {
+                            title: 'Réservation de {{ reservation.idProfile.firstName }}',
+                            start: '{{ reservation.date|date('Y-m-d') }}T{{ reservation.startTime|date('H:i:s') }}'
+                       },
+                   {% endif %}
+               {% endfor %}
+           ],
+           dateClick: function(info) {
+               window.location.href = '{{ path('app_reservation_new') }}?date=' + info.dateStr;
+           }
+       });
+       calendar.render();
+   });
+</script>
+{% endblock %}
+
+{% block body %}
+<div id='calendar'></div>
+{% endblock %}
+

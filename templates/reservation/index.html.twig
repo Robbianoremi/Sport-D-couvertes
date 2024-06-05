@@ -5,28 +5,32 @@
 
 {% block javascripts %}
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.12/index.global.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.12/locales-all.js'></script> <!-- Ajout du script de langue -->
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-       let calendarEl = document.querySelector('#calendar');
-       let calendar = new FullCalendar.Calendar(calendarEl, {
-           initialView: 'dayGridMonth',
-           events: [
-               {% for reservation in reservations %}
-                   {% if reservation.idProfile is not null %}
-                       {
-                            title: 'Réservation de {{ reservation.idProfile.nom }}',
-                            start: '{{ reservation.bookAt|date('Y-m-d\TH:i:s') }}'
-                       },
-                   {% endif %}
-               {% endfor %}
-           ],
-           dateClick: function(info) {
-               window.location.href = '{{ path('app_reservation_new') }}?date=' + info.dateStr;
-           }
-       });
-       calendar.render();
-   });
-</script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let calendarEl = document.querySelector('#calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'fr', // Configuration de la langue française
+            events: [
+                {% for reservation in reservations %}
+                    {% if reservation.idProfile is not null %}
+                        {
+                             title: 'Réservation de {{ reservation.idProfile.nom }}',
+                             start: '{{ reservation.bookAt|date("Y-m-d\\TH:i:s") }}'
+                        }{% if not loop.last %},{% endif %}
+                    {% endif %}
+                {% endfor %}
+            ],
+            dateClick: function(info) {
+                window.location.href = '{{ path('app_reservation_new') }}?date=' + info.dateStr;
+            }
+        });
+        calendar.render();
+    });
+ </script>
+
+
 {% endblock %}
 
 {% block body %}

@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ParticipantRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ParticipantRepository;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
 class Participant
@@ -14,6 +16,8 @@ class Participant
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Email(message: '',)]
+    #[NotBlank]
     private ?string $email = null;
 
     #[ORM\ManyToOne(inversedBy: 'participants')]

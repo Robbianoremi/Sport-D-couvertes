@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ProfileRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProfileRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
 class Profile
@@ -16,24 +18,33 @@ class Profile
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[NotBlank]
+    
     private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
+    #[NotBlank]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 50)]
+    #[Regex('/^\+?[0-9\s\-\(\)]+$/')]
+   
     private ?string $status = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Regex('/^\+?[0-9\s\-\(\)]+$/')]
     private ?string $nomEntreprise = null;
 
     #[ORM\Column(length: 30, nullable: true)]
+    #[Regex('/^\d{14}$/')]
     private ?string $siret = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank]
     private ?string $domiciliation = null;
 
     #[ORM\Column(length: 20)]
+    #[Regex('/^\+?[0-9\s\-\(\)]+$/')]
     private ?string $telephone = null;
 
     #[ORM\OneToOne(inversedBy: 'profile', cascade: ['persist', 'remove'])]

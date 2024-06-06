@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -16,6 +18,10 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column]
+    #[DateTime]
+    #[NotBlank]
+    protected string $nom;
+    protected string $createdAt;
     private ?\DateTimeImmutable $bookAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]

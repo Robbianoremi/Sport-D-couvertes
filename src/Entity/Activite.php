@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ActiviteRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ActiviteRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: ActiviteRepository::class)]
 class Activite
@@ -17,9 +19,12 @@ class Activite
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank]
+    protected string $firstName;
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Regex('/^\+?[0-9\s\-\(\)]+$/')]
     private ?string $detail = null;
 
     /**

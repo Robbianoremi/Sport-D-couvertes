@@ -21,7 +21,7 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
 
-        <h1 class="h3 mb-3 font-weight-normal text-center">S'inscrire</h1>
+        <h1 class="h3 mb-3 font-weight-normal text-center">Entrez vos identifiants</h1>
 
         {{ form_errors(registrationForm) }}
 
@@ -29,12 +29,14 @@
         <div class="mb-3">
             {{ form_label(registrationForm.email, 'Votre email', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.email) }}
         </div>
         <div class="mb-3 position-relative">
             {{ form_label(registrationForm.plainPassword, 'Votre mot de passe', {'label_attr': {'class': 'form-label'}})
             }}
             {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'id': 'plainPassword'}})
             }}
+            {{ form_errors(registrationForm.plainPassword) }}
             <span toggle="#plainPassword" class="fas fa-eye-slash field-icon toggle-password"
                 style="position: absolute; right: 10px; top: 35px; cursor: pointer;"></span>
         </div>
@@ -43,16 +45,19 @@
             'form-label'}}) }}
             {{ form_widget(registrationForm.confirmPassword, {'attr': {'class': 'form-control', 'id':
             'confirmPassword'}}) }}
+            {{ form_errors(registrationForm.confirmPassword) }}
             <span toggle="#confirmPassword" class="fas fa-eye-slash field-icon toggle-password"
                 style="position: absolute; right: 10px; top: 35px; cursor: pointer;"></span>
         </div>
         <div class="mb-3 form-check">
             {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
             {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+            {{ form_errors(registrationForm.agreeTerms) }}
         </div>
 
         <button type="submit" class="btn btn-lg btn-primary w-100">Register</button>
         {{ form_end(registrationForm) }}
+        
     </div>
 </div>
 {% endblock %}

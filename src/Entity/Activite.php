@@ -20,7 +20,6 @@ class Activite
 
     #[ORM\Column(length: 255)]
     #[NotBlank]
-    protected string $firstName;
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT)]

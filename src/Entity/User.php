@@ -44,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $password = null;
 
+
+    private $plainPassword;
+
     #[ORM\OneToOne(mappedBy: 'idUser', cascade: ['persist', 'remove'])]
     private ?Profile $profile = null;
 
@@ -115,6 +118,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
     /**
      * @see UserInterface
      */

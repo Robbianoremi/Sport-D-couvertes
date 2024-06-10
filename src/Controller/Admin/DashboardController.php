@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Activite;
 use App\Entity\User;
+use App\Entity\Profile;
+use App\Entity\Activite;
+use App\Entity\Discipline;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -43,10 +45,17 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::section('Acceuil');
         yield MenuItem::linkToRoute('Retour à l\'accueil', 'fa fa-home', 'app_home');
+        yield MenuItem::section('Dashboard');
         yield MenuItem::linkToDashboard('Dashboard', 'fa-solid fa-bars');
+        yield MenuItem::linkToCrud('Profiles', 'fa-regular fa-id-badge', Profile::class);
+        yield MenuItem::section('Gestion des utilisateurs');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Activités', 'fas fa-user', Activite::class);
+
+        yield MenuItem::linkToCrud('Activités', 'fa-solid fa-puzzle-piece', Activite::class);
+        yield MenuItem::linkToCrud('Disciplines', 'fa-solid fa-medal', Discipline::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
+

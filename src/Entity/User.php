@@ -4,7 +4,7 @@ namespace App\Entity;
 
 
 use Symfony\Component\Validator\Constraints as Assert;
-// use Twig\Profiler\Profile;
+
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints\Email;
@@ -68,6 +68,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $email;
 
         return $this;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->email;
     }
 
     /**

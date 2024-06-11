@@ -18,11 +18,11 @@ class Photo
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Vich\UploadableField(mapping: 'photos', fileNameProperty: 'image')]
+    #[Vich\UploadableField(mapping: 'photos', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $image = null;
+    private ?string $imageName = null;
 
     #[ORM\Column(nullable: true)]
     private ?DateTimeImmutable $updatedAt = null;   
@@ -60,12 +60,12 @@ class Photo
 
     public function setImageName(?string $image): void
     {
-        $this->image = $image;
+        $this->imageName = $image;
     }
 
     public function getImageName(): ?string
     {
-        return $this->image;
+        return $this->imageName;
     }
    
 
@@ -98,7 +98,15 @@ class Photo
         return $this;
     }
 
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
 
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
 
 
 }

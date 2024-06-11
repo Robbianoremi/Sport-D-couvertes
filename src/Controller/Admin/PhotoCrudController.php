@@ -25,7 +25,7 @@ class PhotoCrudController extends AbstractCrudController
             TextField::new('title'),
             TextEditorField::new('description'),
             DateTimeField::new('updatedAt', 'Créé le'),
-            ImageField::new('image', 'Photos')
+            ImageField::new('imageName', 'Photos')
                 ->setBasePath('/images/photos')
                 ->setUploadDir('public/images/photos')
                 ->onlyOnIndex(),

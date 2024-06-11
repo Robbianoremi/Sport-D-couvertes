@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Photo;
+use App\Entity\Video;
 use App\Entity\Profile;
 use App\Entity\Activite;
 use App\Entity\Discipline;
@@ -40,7 +42,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Espace Administrateur ');
+            ->setTitle('Espace Administrateur');
     }
 
     public function configureMenuItems(): iterable
@@ -57,8 +59,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Activités & Disciplines');
         yield MenuItem::linkToCrud('Activités', 'fa-solid fa-puzzle-piece', Activite::class);
         yield MenuItem::linkToCrud('Disciplines', 'fa-solid fa-medal', Discipline::class);
-        
-       
+
+        yield MenuItem::section('Photos & Videos');
+        yield MenuItem::linkToCrud('Photos', 'fa-regular fa-image', Photo::class);
+        yield MenuItem::linkToCrud('Videos', 'fa-solid fa-video', Video::class);
     }
 }
 

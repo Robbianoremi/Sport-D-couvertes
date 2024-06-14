@@ -22,7 +22,7 @@ class Reservation
     #[NotBlank]
     protected string $nom;
     protected string $createdAt;
-    private ?\DateTimeImmutable $bookAt = null;
+    private ?\DateTimeImmutable $bookAt ;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
@@ -46,6 +46,30 @@ class Reservation
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;  
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;      
+
+        return $this;
     }
 
     public function getBookAt(): ?\DateTimeImmutable

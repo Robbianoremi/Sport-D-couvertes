@@ -8,6 +8,7 @@ use App\Entity\Video;
 use App\Entity\Profile;
 use App\Entity\Activite;
 use App\Entity\Discipline;
+use App\Entity\Reservation;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -55,6 +56,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Gestion des utilisateurs');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Profiles', 'fa-regular fa-id-badge', Profile::class);
+
+        yield MenuItem::section('Gestion des Réservations');
+        yield MenuItem::linkToCrud('Réservations', 'fa-solid fa-calendar-days', Reservation::class);
 
         yield MenuItem::section('Activités & Disciplines');
         yield MenuItem::linkToCrud('Activités', 'fa-solid fa-puzzle-piece', Activite::class);

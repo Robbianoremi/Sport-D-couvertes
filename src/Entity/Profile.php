@@ -61,16 +61,11 @@ class Profile
     #[ORM\OneToOne(inversedBy: 'profile', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $idUser = null;
-
-    /**
-     * @var Collection<int, Reservation>
-     */
+   
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'idProfile')]
     private Collection $reservations;
 
-    /**
-     * @var Collection<int, Commentaire>
-     */
+    
     #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'idProfile')]
     private Collection $commentaires;
 
@@ -82,12 +77,9 @@ class Profile
     #[NotBlank]
     private ?string $bio = null;
 
-    
-
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;   
-    
-    
+
 
      /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -242,7 +234,7 @@ class Profile
     public function addReservation(Reservation $reservation): static
     {
         if (!$this->reservations->contains($reservation)) {
-            $this->reservations->add($reservation);
+            $this->reservations[] = $reservation;
             $reservation->setIdProfile($this);
         }
 
@@ -319,7 +311,10 @@ class Profile
         return $this->updatedAt;
     }
 
-   
+    public function __toString() : string
+    {
+        return $this->prenom;
+    }
 }
    
 

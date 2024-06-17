@@ -58,7 +58,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Profiles', 'fa-regular fa-id-badge', Profile::class);
 
         yield MenuItem::section('Gestion des Réservations');
-        yield MenuItem::linkToCrud('Réservations', 'fa-solid fa-calendar-days', Reservation::class);
+        yield MenuItem::linkToCrud('Réservation', 'fa-solid fa-calendar-days', Reservation::class);
 
         yield MenuItem::section('Activités & Disciplines');
         yield MenuItem::linkToCrud('Activités', 'fa-solid fa-puzzle-piece', Activite::class);

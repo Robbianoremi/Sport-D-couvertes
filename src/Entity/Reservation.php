@@ -2,12 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints\DateTime;
-use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -17,71 +15,23 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    #[DateTime]
-    #[NotBlank]
-    protected string $nom;
-    protected string $createdAt;
-    private ?\DateTimeImmutable $bookAt ;
-
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\ManyToOne(inversedBy: 'reservations', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Profile $idProfile = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\ManyToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Discipline $idDiscipline = null;
 
-    /**
-     * @var Collection<int, Participant>
-     */
-    #[ORM\OneToMany(targetEntity: Participant::class, mappedBy: 'idReservation')]
-    private Collection $participants;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
 
-    public function __construct()
-    {
-        $this->participants = new ArrayCollection();
-    }
+    #[ORM\Column]
+    private ?\DateTimeImmutable $bookAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): static
-    {
-        $this->nom = $nom;  
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;      
-
-        return $this;
-    }
-
-    public function getBookAt(): ?\DateTimeImmutable
-    {
-        return $this->bookAt;
-    }
-
-    public function setBookAt(\DateTimeImmutable $bookAt): static
-    {
-        $this->bookAt = $bookAt;
-
-        return $this;
     }
 
     public function getIdProfile(): ?Profile
@@ -108,32 +58,26 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @return Collection<int, Participant>
-     */
-    public function getParticipants(): Collection
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->participants;
+        return $this->createdAt;
     }
 
-    public function addParticipant(Participant $participant): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        if (!$this->participants->contains($participant)) {
-            $this->participants->add($participant);
-            $participant->setIdReservation($this);
-        }
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function removeParticipant(Participant $participant): static
+    public function getBookAt(): ?\DateTimeImmutable
     {
-        if ($this->participants->removeElement($participant)) {
-            // set the owning side to null (unless already changed)
-            if ($participant->getIdReservation() === $this) {
-                $participant->setIdReservation(null);
-            }
-        }
+        return $this->bookAt;
+    }
+
+    public function setBookAt(\DateTimeImmutable $bookAt): static
+    {
+        $this->bookAt = $bookAt;
 
         return $this;
     }

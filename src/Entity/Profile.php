@@ -78,7 +78,13 @@ class Profile
     private ?string $bio = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;   
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    /**
+     * @var Collection<int, Panier>
+     */
+    #[ORM\OneToMany(targetEntity: Panier::class, mappedBy: 'idProfile')]
+    private Collection $paniers;   
 
 
      /**
@@ -120,6 +126,7 @@ class Profile
     {
         $this->reservations = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->paniers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -314,6 +321,36 @@ class Profile
     public function __toString() : string
     {
         return $this->prenom;
+    }
+
+    /**
+     * @return Collection<int, Panier>
+     */
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Panier $panier): static
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers->add($panier);
+            $panier->setIdProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): static
+    {
+        if ($this->paniers->removeElement($panier)) {
+            // set the owning side to null (unless already changed)
+            if ($panier->getIdProfile() === $this) {
+                $panier->setIdProfile(null);
+            }
+        }
+
+        return $this;
     }
 }
    

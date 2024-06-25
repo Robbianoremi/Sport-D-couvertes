@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DisciplineRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: DisciplineRepository::class)]
@@ -21,9 +21,18 @@ class Discipline
     #[NotBlank]
     private ?string $nom = null;
 
+    #[ORM\Column]
+    private ?float $prix = null;
+
     #[ORM\Column(type: Types::TEXT)]
     #[NotBlank]
     private ?string $detail = null;
+
+     /**
+     * @var Collection<int, PanierDiscipline>
+     */
+    #[ORM\OneToMany(mappedBy: 'discipline', targetEntity: PanierDiscipline::class, cascade: ['persist', 'remove'])]
+    private Collection $panierDisciplines;
 
     /**
      * @var Collection<int, Reservation>
@@ -45,6 +54,7 @@ class Discipline
     {
         $this->reservations = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->panierDisciplines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,6 +82,19 @@ class Discipline
     public function setDetail(string $detail): static
     {
         $this->detail = $detail;
+
+        return $this;
+    }
+
+    
+    public function getPrix(): ?string
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(string $prix): static
+    {
+        $this->prix = $prix;
 
         return $this;
     }
@@ -150,5 +173,34 @@ class Discipline
     public function __toString()
     {
         return $this->nom;
+    }
+
+     /**
+     * @return Collection<int, PanierDiscipline>
+     */
+    public function getPanierDisciplines(): Collection
+    {
+        return $this->panierDisciplines;
+    }
+
+    public function addPanierDiscipline(PanierDiscipline $panierDiscipline): static
+    {
+        if (!$this->panierDisciplines->contains($panierDiscipline)) {
+            $this->panierDisciplines->add($panierDiscipline);
+            $panierDiscipline->setDiscipline($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanierDiscipline(PanierDiscipline $panierDiscipline): static
+    {
+        if ($this->panierDisciplines->removeElement($panierDiscipline)) {
+            if ($panierDiscipline->getDiscipline() === $this) {
+                $panierDiscipline->setDiscipline(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -3,10 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Discipline;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class DisciplineCrudController extends AbstractCrudController
 {
@@ -21,7 +23,8 @@ class DisciplineCrudController extends AbstractCrudController
         return [
             IdField::new('id'),
             TextField::new('nom'),
-            TextEditorField::new('detail'),
+            TextareaField::new('detail'),
+           
         ];
     }
     

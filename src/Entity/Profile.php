@@ -2,24 +2,22 @@
 
 namespace App\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Repository\ProfileRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints\Regex;
-use Symfony\Component\Validator\Constraints\NotBlank;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
 #[Vich\Uploadable]
+
 class Profile
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[Vich\UploadableField(mapping: 'profile', fileNameProperty: 'imageName')]
@@ -29,33 +27,29 @@ class Profile
     private ?string $imageName = null;
 
     #[ORM\Column(length: 50)]
-    #[NotBlank]
-    
+    #[Assert\NotBlank]
     private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
-    #[NotBlank]
+    #[Assert\NotBlank]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 50)]
-    #[Regex('/^\+?[0-9\s\-\(\)]+$/')]
-   
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $status = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    #[Regex('/^\+?[0-9\s\-\(\)]+$/')]
+    #[Assert\Regex('/^\+?[0-9\s\-\(\)]+$/')]
     private ?string $nomEntreprise = null;
 
     #[ORM\Column(length: 30, nullable: true)]
-    #[Regex('/^\d{14}$/')]
+    #[Assert\Regex('/^\d{14}$/')]
     private ?string $siret = null;
 
-    #[ORM\Column(length: 255)]
-    #[NotBlank]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $domiciliation = null;
 
     #[ORM\Column(length: 20)]
-    #[Regex('/^\+?[0-9\s\-\(\)]+$/')]
+    #[Assert\Regex('/^\+?[0-9\s\-\(\)]+$/')]
     private ?string $telephone = null;
 
     #[ORM\OneToOne(inversedBy: 'profile', cascade: ['persist', 'remove'])]
@@ -65,29 +59,31 @@ class Profile
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'idProfile')]
     private Collection $reservations;
 
-    
     #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'idProfile')]
     private Collection $commentaires;
 
     #[ORM\Column(length: 255)]
-    #[NotBlank]
+    #[Assert\NotBlank]
     private ?string $sexe = null;
 
     #[ORM\Column(length: 255)]
-    #[NotBlank]
+    #[Assert\NotBlank]
     private ?string $bio = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * @var Collection<int, Panier>
      */
     #[ORM\OneToMany(targetEntity: Panier::class, mappedBy: 'idProfile')]
-    private Collection $paniers;   
+    private Collection $paniers;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;   
 
 
-     /**
+    /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
      * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
@@ -139,7 +135,7 @@ class Profile
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -151,7 +147,7 @@ class Profile
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -163,7 +159,7 @@ class Profile
         return $this->status;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -175,7 +171,7 @@ class Profile
         return $this->nomEntreprise;
     }
 
-    public function setNomEntreprise(?string $nomEntreprise): static
+    public function setNomEntreprise(?string $nomEntreprise): self
     {
         $this->nomEntreprise = $nomEntreprise;
 
@@ -187,7 +183,7 @@ class Profile
         return $this->siret;
     }
 
-    public function setSiret(?string $siret): static
+    public function setSiret(?string $siret): self
     {
         $this->siret = $siret;
 
@@ -199,7 +195,7 @@ class Profile
         return $this->domiciliation;
     }
 
-    public function setDomiciliation(string $domiciliation): static
+    public function setDomiciliation(string $domiciliation): self
     {
         $this->domiciliation = $domiciliation;
 
@@ -211,7 +207,7 @@ class Profile
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): static
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
 
@@ -223,7 +219,7 @@ class Profile
         return $this->idUser;
     }
 
-    public function setIdUser(User $idUser): static
+    public function setIdUser(User $idUser): self
     {
         $this->idUser = $idUser;
 
@@ -238,7 +234,7 @@ class Profile
         return $this->reservations;
     }
 
-    public function addReservation(Reservation $reservation): static
+    public function addReservation(Reservation $reservation): self
     {
         if (!$this->reservations->contains($reservation)) {
             $this->reservations[] = $reservation;
@@ -248,7 +244,7 @@ class Profile
         return $this;
     }
 
-    public function removeReservation(Reservation $reservation): static
+    public function removeReservation(Reservation $reservation): self
     {
         if ($this->reservations->removeElement($reservation)) {
             // set the owning side to null (unless already changed)
@@ -268,7 +264,7 @@ class Profile
         return $this->commentaires;
     }
 
-    public function addCommentaire(Commentaire $commentaire): static
+    public function addCommentaire(Commentaire $commentaire): self
     {
         if (!$this->commentaires->contains($commentaire)) {
             $this->commentaires->add($commentaire);
@@ -278,7 +274,7 @@ class Profile
         return $this;
     }
 
-    public function removeCommentaire(Commentaire $commentaire): static
+    public function removeCommentaire(Commentaire $commentaire): self
     {
         if ($this->commentaires->removeElement($commentaire)) {
             // set the owning side to null (unless already changed)
@@ -295,7 +291,7 @@ class Profile
         return $this->sexe;
     }
 
-    public function setSexe(string $sexe): static
+    public function setSexe(string $sexe): self
     {
         $this->sexe = $sexe;
 
@@ -307,18 +303,26 @@ class Profile
         return $this->bio;
     }
 
-    public function setBio(string $bio): static
+    public function setBio(string $bio): self
     {
         $this->bio = $bio;
 
         return $this;
     }
+
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function __toString() : string
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function __toString(): string
     {
         return $this->prenom;
     }
@@ -331,17 +335,17 @@ class Profile
         return $this->paniers;
     }
 
-    public function addPanier(Panier $panier): static
+    public function addPanier(Panier $panier): self
     {
         if (!$this->paniers->contains($panier)) {
-            $this->paniers->add($panier);
+            $this->paniers[] = $panier;
             $panier->setIdProfile($this);
         }
 
         return $this;
     }
 
-    public function removePanier(Panier $panier): static
+    public function removePanier(Panier $panier): self
     {
         if ($this->paniers->removeElement($panier)) {
             // set the owning side to null (unless already changed)
@@ -352,17 +356,49 @@ class Profile
 
         return $this;
     }
+
+    public function __sleep()
+{
+    // Liste des propriétés à sérialiser
+    return [
+        'id',
+        'nom',
+        'prenom',
+        'status',
+        'nomEntreprise',
+        'siret',
+        'domiciliation',
+        'telephone',
+        'sexe',
+        'bio',
+        'updatedAt',
+        'imageFile',
+        'imageName',
+        // Ajoutez d'autres propriétés si nécessaire
+    ];
 }
-   
 
+public function __wakeup()
+{
+    // Initialisation de certaines propriétés après la désérialisation si nécessaire
+    if ($this->updatedAt === null) {
+        $this->updatedAt = new \DateTimeImmutable(); // Initialisation de updatedAt si null
+    }
+    // Autres initialisations si nécessaires
+}
 
+public function getCreatedAt(): ?\DateTimeImmutable
+{
+    return $this->createdAt;
+}
 
+public function setCreatedAt(\DateTimeImmutable $createdAt): static
+{
+    $this->createdAt = $createdAt;
 
+    return $this;
+}
 
-
-
-
-
-
+}
 
 

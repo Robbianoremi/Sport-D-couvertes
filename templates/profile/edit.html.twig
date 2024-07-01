@@ -1,0 +1,25 @@
+{# templates/profil/edit.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer Profil{% endblock %}
+
+{% block body %}
+
+<div class ="mx-auto"></div>
+    <h1>Créer votre profil</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.imageFile) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.status) }}
+        {{ form_row(form.nomEntreprise) }}
+        {{ form_row(form.siret) }}
+        {{ form_row(form.domiciliation) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.sexe) }}
+        {{ form_row(form.bio) }}
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    {{ form_end(form) }}
+{% endblock %}

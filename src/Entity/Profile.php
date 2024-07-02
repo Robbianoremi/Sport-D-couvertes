@@ -38,7 +38,7 @@ class Profile
     private ?string $status = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    #[Assert\Regex('/^\+?[0-9\s\-\(\)]+$/')]
+   
     private ?string $nomEntreprise = null;
 
     #[ORM\Column(length: 30, nullable: true)]

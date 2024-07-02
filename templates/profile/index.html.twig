@@ -4,4 +4,23 @@
 
 {% block body %}
 
+<div class ="mx-auto w-50 my-5">
+<div class="card w-25 shadow">
+    <img src="{{ asset('images/profile/' ~ profile.imageName) }}" class="card-img-top" alt="Profile">
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ profile.nom }}  {{ profile.prenom }} </li>
+            <li class="list-group-item">{{ profile.sexe }}</li>
+            <li class="list-group-item">{{ profile.status }}</li>
+            <li class="list-group-item">{{ profile.bio }}</li>
+            <li class="list-group-item">{{ profile.domiciliation }}</li>
+            <li class="list-group-item">{{ profile.telephone }}</li>
+        </ul>
+    </div>
+    <li class="list-group-item"><hr class="divider"></li>
+    <!-- <a href="{{ path('profil_edit', {'id': profile.id}) }}" class="btn btn-primary w-75 mx-auto mb-2">Modifier Profile</a> -->
+  </div>
+</div>
+
 {% endblock %}
+

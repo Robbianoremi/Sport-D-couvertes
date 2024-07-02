@@ -24,9 +24,16 @@ class ProfileController extends AbstractController
     #[Route('/profile', name: 'app_profile')]
     public function index(): Response
     {
+        $user = $this->getUser();
+        $profile = $user->getProfile();
+
+
         return $this->render('profile/index.html.twig', [
-            'controller_name' => 'ProfileController',
+            'profile' => $profile,
+           
         ]);
+
+        
     }
 
     #[Route('/profile/edit', name: 'app_edit_profile')]
@@ -53,7 +60,22 @@ class ProfileController extends AbstractController
         return $this->render('profile/edit.html.twig', [
             'form' => $form->createView(),
         ]);
+        
+    }
+    public function show(Profile $profile)
+    {
+        return $this->render('profile/index.html.twig', [
+            'profile' => $profile,
+            'imageName' => $profile->getImageName(), // Ajoutez cette ligne si vous avez une méthode getImageUrl() dans votre entité
+        ]);
     }
 
+    // public function edit(Profile $profile): Response
+    // {
+       
+    //     return $this->render('profile/edit.html.twig', [
+    //         'profile' => $profile,
+    //     ]);
+    // }
 
 }

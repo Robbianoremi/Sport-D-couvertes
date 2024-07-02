@@ -6,7 +6,7 @@
 
 {% block body %}
 
-<div class ="mx-auto"></div>
+<div class ="mx-auto w-50">
     <h1>Créer votre profil</h1>
 
     {{ form_start(form) }}
@@ -22,4 +22,6 @@
         {{ form_row(form.bio) }}
         <button type="submit" class="btn btn-primary">Enregistrer</button>
     {{ form_end(form) }}
+</div>
+
 {% endblock %}

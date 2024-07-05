@@ -3,10 +3,64 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<div class="container-fluid" style="height: 80vh">
 
+<div class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <h1>Bienvenue sur notre site de réservation</h1>
+        <p>Réservez vos activités préférées en quelques clics et vivez des moments inoubliables</p>
+        <a href="{{ path('app_reservation') }}" class="btn btn-primary btn-lg">Voir les réservations</a>
+        <a href="{{ path('app_reservation_new') }}" class="btn btn-success btn-lg">Créer une nouvelle réservation</a>
+        {% if not app.user %}
+            <a href="{{ path('app_login') }}" class="btn btn-info btn-lg">Se connecter</a>
+            <a href="{{ path('app_register') }}" class="btn btn-warning btn-lg">S'inscrire</a>
+        {% endif %}
+    </div>
 </div>
 
+<div class="features">
+    <div class="feature">
+        <img src="{{ asset('images/facile.png') }}" alt="Facile à utiliser">
+        <h3>Facile à utiliser</h3>
+        <p>Réservez vos activités en toute simplicité avec notre interface intuitive.</p>
+    </div>
+    <div class="feature">
+        <img src="{{ asset('images/icon2.png') }}" alt="Variété d'activités">
+        <h3>Variété d'activités</h3>
+        <p>Choisissez parmi une large gamme d'activités pour tous les goûts et tous les âges.</p>
+    </div>
+    <div class="feature">
+        <img src="{{ asset('images/icon3.png') }}" alt="Support 24/7">
+        <h3>Support 24/7</h3>
+        <p>Notre équipe est disponible à tout moment pour vous assister dans vos réservations.</p>
+    </div>
+</div>
+
+<div class="separator"></div>
+
+
+<div class="activities">
+    <div class="activity">
+        <img src="{{ asset('build/images/activity1.jpg') }}" alt="Activité 1">
+        <h3>Activité 1</h3>
+        <p>Description de l'activité 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <div class="activity">
+        <img src="{{ asset('build/images/activity2.jpg') }}" alt="Activité 2">
+        <h3>Activité 2</h3>
+        <p>Description de l'activité 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <div class="activity">
+        <img src="{{ asset('build/images/activity3.jpg') }}" alt="Activité 3">
+        <h3>Activité 3</h3>
+        <p>Description de l'activité 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <div class="activity">
+        <img src="{{ asset('build/images/activity4.jpg') }}" alt="Activité 4">
+        <h3>Activité 4</h3>
+        <p>Description de l'activité 4 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+</div>
   
     
     

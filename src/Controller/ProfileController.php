@@ -6,11 +6,12 @@ namespace App\Controller;
 
 use App\Entity\Profile;
 use App\Form\ProfilFormType;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ReservationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\ORM\EntityManagerInterface;
 
 class ProfileController extends AbstractController
 {
@@ -22,14 +23,16 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profile', name: 'app_profile')]
-    public function index(): Response
+    public function index(ReservationRepository $reservationRepository): Response
     {
         $user = $this->getUser();
         $profile = $user->getProfile();
 
+        $reservation = $reservationRepository->findBy(['idProfile' => $profile->getId()]);
 
         return $this->render('profile/index.html.twig', [
             'profile' => $profile,
+            'reservations' => $reservation
            
         ]);
 
@@ -62,20 +65,30 @@ class ProfileController extends AbstractController
         ]);
         
     }
-    public function show(Profile $profile)
+    public function show(Profile $profile, ReservationRepository $reservationRepository): Response
     {
+        $user = $this->getUser();
+        $profile = $user->getProfile();
+
+        $reservation = $reservationRepository->findBy(['idProfile' => $profile->getId()]);
+        
+        $reservation = $reservationRepository->findOneBy ([
+            'idProfile' => $profile
+        ]);
+
         return $this->render('profile/index.html.twig', [
             'profile' => $profile,
             'imageName' => $profile->getImageName(), // Ajoutez cette ligne si vous avez une méthode getImageUrl() dans votre entité
+            'reservation' => $reservation,
         ]);
     }
 
-    // public function edit(Profile $profile): Response
-    // {
+    public function edit(Profile $profile): Response
+    {
        
-    //     return $this->render('profile/edit.html.twig', [
-    //         'profile' => $profile,
-    //     ]);
-    // }
+        return $this->render('profile/edit.html.twig', [
+            'profile' => $profile,
+        ]);
+    }
 
 }

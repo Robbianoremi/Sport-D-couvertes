@@ -29,6 +29,9 @@ class Reservation
     #[ORM\Column]
     private ?\DateTimeImmutable $bookAt = null;
 
+    #[ORM\Column]
+    private ?int $nbrPers = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +81,18 @@ class Reservation
     public function setBookAt(\DateTimeImmutable $bookAt): static
     {
         $this->bookAt = $bookAt;
+
+        return $this;
+    }
+
+    public function getNbrPers(): ?int
+    {
+        return $this->nbrPers;
+    }
+
+    public function setNbrPers(int $nbrPers): static
+    {
+        $this->nbrPers = $nbrPers;
 
         return $this;
     }

@@ -5,6 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 // Styles globaux (si nécessaire)
 import './styles/app.scss';
+import './styles/accueil.scss';
 
 // Démarrage de Stimulus (si utilisé)
 import './bootstrap';

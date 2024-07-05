@@ -2,44 +2,62 @@
 
 namespace App\Form;
 
-use App\Entity\Profile;
 use App\Entity\Discipline;
 use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Validator\Constraints\Regex;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ReservationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('bookAt', null, 
-            //     [
-            //         'constraints' => [
-            //             new NotBlank([
-            //                 'message' => 'Veuillez entrer une date et une heure',
-            //             ]),
-            //             new Regex([
-            //                 'pattern' => '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:Z|[+\-]\d{2}:\d{2})?$/',
-            //                 'message' => 'Le format de la date et de l\'heure est invalide',
-            //             ]),
-            //         ],
-            //     'widget' => 'single_text',
-            //     'label' => 'Date et Heure',
-            // ])
+            ->add('bookAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'label' => 'Date',
+            ])
             ->add('idDiscipline', EntityType::class, [
                 'class' => Discipline::class,
                 'label' => 'Activité',
-'choice_label' => 'nom'
+                'choice_label' => 'nom',
+                'placeholder' => 'Choisissez une activité',
+                'required' => false,
+               
             ])
-            ->add('idProfile', EntityType::class, [
-                'class' => Profile::class,
-                'label' => 'Profile',
-'choice_label' => 'nom'
+            ->add('nbrPers', ChoiceType::class, [
+                'label' => 'Nombre de personnes',
+            
+                'choices' => [
+                    '1 pers' => 1,
+                    '2 pers' => 2,
+                    '3 pers' => 3,
+                    '4 pers' => 4,
+                    '5 pers' => 5,
+                    '6 pers' => 6,
+                    '7 pers' => 7,
+                    '8 pers' => 8,
+                    '9 pers' => 9,
+                    '10 pers' => 10,
+                ],
+                'placeholder' => 'Choisissez le nombre de personnes',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('price', NumberType::class, [
+                'label' => 'Prix (€)',
+                'attr' => [
+                    'class' => 'form-control',
+                    'readonly' => true,
+                ],
+                'mapped' => false, // ce champ n'est pas mappé à l'entité
             ])
         ;
     }

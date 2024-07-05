@@ -4,23 +4,53 @@
 
 {% block body %}
 
-<div class ="mx-auto w-50 my-5">
-<div class="card w-25 shadow">
-    <img src="{{ asset('images/profile/' ~ profile.imageName) }}" class="card-img-top" alt="Profile">
-    <div class="card-body">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{ profile.nom }}  {{ profile.prenom }} </li>
-            <li class="list-group-item">{{ profile.sexe }}</li>
-            <li class="list-group-item">{{ profile.status }}</li>
-            <li class="list-group-item">{{ profile.bio }}</li>
-            <li class="list-group-item">{{ profile.domiciliation }}</li>
-            <li class="list-group-item">{{ profile.telephone }}</li>
-        </ul>
+
+
+<div class="container-fluid py-3">
+    <div class="row d-flex justify-content-center">
+
+        <div class="col-lg-4 ">
+            <div class="card w-50">
+                <img src="{{ asset('images/profile/' ~ profile.imageName) }}" class="card-img-top" alt="Profile">
+                <div class="card-body ">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ profile.nom }} {{ profile.prenom }} </li>
+                        <li class="list-group-item">{{ profile.sexe }}</li>
+                        <li class="list-group-item">{{ profile.status }}</li>
+                        <li class="list-group-item">{{ profile.bio }}</li>
+                        <li class="list-group-item">{{ profile.domiciliation }}</li>
+                        <li class="list-group-item">{{ profile.telephone }}</li>
+                    </ul>
+                </div>
+                <li class="list-group-item">
+                    <hr class="divider">
+                </li>
+                <a href="{{ path('app_edit_profile', {'id': profile.id}) }}"
+                    class="btn btn-primary w-75 mx-auto mb-2">Modifier Profile</a>
+            </div>
+        </div>
+
+        {% for reservation in reservations %}
+
+        <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ reservation.idProfile.nom }} {{ reservation.idProfile.prenom }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ reservation.bookAt|date('d/m/Y H:i') }}</h6>
+                
+                <p class="card-text">Activité : {{ reservation.idDiscipline.nom }}</p>
+                <p class="card-text">Nombre de personnes : {{ reservation.nbrPers }}</p>
+    
+                {# Ajoute d'autres détails de la réservation ici si nécessaire #}
+                
+            </div>
+        </div>
     </div>
-    <li class="list-group-item"><hr class="divider"></li>
-    <!-- <a href="{{ path('profil_edit', {'id': profile.id}) }}" class="btn btn-primary w-75 mx-auto mb-2">Modifier Profile</a> -->
-  </div>
+    </div>
 </div>
 
-{% endblock %}
 
+    {% endfor %}
+
+
+    {% endblock %}

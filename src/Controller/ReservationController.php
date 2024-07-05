@@ -42,7 +42,7 @@ class ReservationController extends AbstractController
                 return $this->redirectToRoute('app_login'); // Rediriger vers la page de connexion
             }
 
-            $profile = $user->getIdProfile();
+            $profile = $user->getProfile();
             if ($profile === null) {
                 $this->addFlash('danger', 'Vous n\'avez pas de profil associé.');
                 return $this->redirectToRoute('app_profile_new'); // Rediriger vers la page de création de profil

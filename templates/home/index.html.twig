@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="hero">
+<div class="container-fluid text-center py-5 hero">
     <div class="overlay"></div>
     <div class="hero-content">
         <h1>Bienvenue sur notre site de réservation</h1>
@@ -12,56 +12,79 @@
         <a href="{{ path('app_reservation') }}" class="btn btn-primary btn-lg">Voir les réservations</a>
         <a href="{{ path('app_reservation_new') }}" class="btn btn-success btn-lg">Créer une nouvelle réservation</a>
         {% if not app.user %}
-            <a href="{{ path('app_login') }}" class="btn btn-info btn-lg">Se connecter</a>
-            <a href="{{ path('app_register') }}" class="btn btn-warning btn-lg">S'inscrire</a>
+
         {% endif %}
     </div>
 </div>
 
-<div class="features">
-    <div class="feature">
-        <img src="{{ asset('images/facile.png') }}" alt="Facile à utiliser">
-        <h3>Facile à utiliser</h3>
-        <p>Réservez vos activités en toute simplicité avec notre interface intuitive.</p>
-    </div>
-    <div class="feature">
-        <img src="{{ asset('images/icon2.png') }}" alt="Variété d'activités">
-        <h3>Variété d'activités</h3>
-        <p>Choisissez parmi une large gamme d'activités pour tous les goûts et tous les âges.</p>
-    </div>
-    <div class="feature">
-        <img src="{{ asset('images/icon3.png') }}" alt="Support 24/7">
-        <h3>Support 24/7</h3>
-        <p>Notre équipe est disponible à tout moment pour vous assister dans vos réservations.</p>
+
+<div class=" container-fluid text-center features py-5 px-5">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="feature">
+                <img src="{{ asset('images/facile.png') }}" alt="Facile à utiliser">
+                <h3>Facile à utiliser</h3>
+                <p>Réservez vos activités en toute simplicité avec notre interface intuitive.</p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="feature">
+                <img src="{{ asset('images/icon2.png') }}" alt="Variété d'activités">
+                <h3>Variété d'activités</h3>
+                <p>Choisissez parmi une large gamme d'activités pour tous les goûts et tous les âges.</p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="feature">
+                <img src="{{ asset('images/icon3.png') }}" alt="Support 24/7">
+                <h3>Support 24/7</h3>
+                <p>Notre équipe est disponible à tout moment pour vous assister dans vos réservations.</p>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="separator"></div>
 
 
-<div class="activities">
-    <div class="activity">
-        <img src="{{ asset('build/images/activity1.jpg') }}" alt="Activité 1">
-        <h3>Activité 1</h3>
-        <p>Description de l'activité 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-    <div class="activity">
-        <img src="{{ asset('build/images/activity2.jpg') }}" alt="Activité 2">
-        <h3>Activité 2</h3>
-        <p>Description de l'activité 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-    <div class="activity">
-        <img src="{{ asset('build/images/activity3.jpg') }}" alt="Activité 3">
-        <h3>Activité 3</h3>
-        <p>Description de l'activité 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-    <div class="activity">
-        <img src="{{ asset('build/images/activity4.jpg') }}" alt="Activité 4">
-        <h3>Activité 4</h3>
-        <p>Description de l'activité 4 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<div class="container-fluid activities py-3">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="activity">
+                <img src="{{ asset('build/images/activity1.jpg') }}" alt="Activité 1">
+                <h3>Coaching</h3>
+                <p>Transformez votre condition physique avec notre gamme variée de programmes de coaching personnalisés
+                    et motivants</p>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="activity">
+                <img src="{{ asset('build/images/activity2.jpg') }}" alt="Activité 2">
+                <h3>Bien-être</h3>
+                <p>Découvrez une oasis de sérénité et de revitalisation, où chaque séance est conçue pour enrichir votre
+                    équilibre intérieur et votre vitalité</p>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="activity">
+                <img src="{{ asset('build/images/activity3.jpg') }}" alt="Activité 3">
+                <h3>Découvertes</h3>
+                <p>"Explorez de nouvelles passions et découvrez des expériences uniques qui enrichiront votre quotidien à travers des activités et des aventures captivantes
+                </p>
+            </div>
+        </div>
+
+            <div class="col-lg-3">
+                <div class="activity">
+                    <img src="{{ asset('build/images/activity4.jpg') }}" alt="Activité 4">
+                    <h3>Animations</h3>
+                    <p>Dynamisez vos événements avec notre sélection d'animations captivantes, garantissant des moments
+                        mémorables pour tous.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-  
-    
-    
-{% endblock %}
+
+
+    {% endblock %}

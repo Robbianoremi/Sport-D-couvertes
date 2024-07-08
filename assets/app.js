@@ -6,6 +6,9 @@ import interactionPlugin from '@fullcalendar/interaction';
 // Styles globaux (si nécessaire)
 import './styles/app.scss';
 import './styles/accueil.scss';
+import './styles/coaching.scss';
+import './styles/bienetre.scss';
+
 
 // Démarrage de Stimulus (si utilisé)
 import './bootstrap';

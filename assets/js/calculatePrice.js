@@ -1,19 +1,19 @@
-const activity = document.querySelector('#disciplines');
-const nbre = document.querySelector('#nbrpers');
-const submit = document.querySelector('#submit');
-const result = document.querySelector('#result');
+// const activity = document.querySelector('#disciplines');
+// const nbre = document.querySelector('#nbrpers');
+// const submit = document.querySelector('#submit');
+// const result = document.querySelector('#result');
 
 
-submit.addEventListener('click', (e) => {
-  e.preventDefault
- let activityPrix = activity.value;
- let nbrePrix = nbre.value;
- let total = activityPrix * nbrePrix;
- result.innerHTML = total
+// submit.addEventListener('click', (e) => {
+//   e.preventDefault
+//  let activityPrix = activity.value;
+//  let nbrePrix = nbre.value;
+//  let total = activityPrix * nbrePrix;
+//  result.innerHTML = total
 
 
-})
-public/js/calculatePrice.js
+// })
+// public/js/calculatePrice.js
 
 // document.addEventListener('DOMContentLoaded', function() {
 //   const activity = document.querySelector('#disciplines');
@@ -40,3 +40,36 @@ public/js/calculatePrice.js
 
 //   calculatePrice(); // Initial calculation on page load
 // });
+document.addEventListener('DOMContentLoaded', function() {
+  // Sélection des éléments du formulaire
+  const selectActivite = document.getElementById('reservation_form_idDiscipline');
+  const selectNbrPersonnes = document.getElementById('reservation_form_nbrPers');
+  const inputPrix = document.getElementById('reservation_form_price');
+
+  // Écoute des changements dans les champs
+  selectActivite.addEventListener('change', updatePrice);
+  selectNbrPersonnes.addEventListener('change', updatePrice);
+
+  // Fonction pour mettre à jour le prix
+  function updatePrice() {
+      // Récupérer l'option sélectionnée
+      const selectedOption = selectActivite.options[selectActivite.selectedIndex];
+
+      // Récupérer le prix de l'activité sélectionnée
+      const prix = parseFloat(selectedOption.dataset.prix);
+
+      // Récupérer le nombre de personnes
+      const nbrPersonnes = parseInt(selectNbrPersonnes.value);
+
+      // Calculer le prix total
+      let prixTotal = prix * nbrPersonnes;
+
+      // Afficher le prix ou un message si le prix est zéro
+      if (prixTotal > 0) {
+          inputPrix.value = prixTotal.toFixed(2); // Affichage avec deux décimales
+      } else {
+          inputPrix.value = ''; // Réinitialisation du champ
+          inputPrix.placeholder = 'Demande sur devis'; // Message si le prix est zéro
+      }
+  }
+});

@@ -28,22 +28,25 @@ class ReservationFormType extends AbstractType
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisissez une activité',
                 'required' => false,
+                'choice_attr' => function ($choice, $key, $value) {
+        return ['data-prix' => $choice->getPrix()];
+    },
                
             ])
             ->add('nbrPers', ChoiceType::class, [
                 'label' => 'Nombre de personnes',
             
                 'choices' => [
-                    '1 pers' => 1,
-                    '2 pers' => 2,
-                    '3 pers' => 3,
-                    '4 pers' => 4,
-                    '5 pers' => 5,
-                    '6 pers' => 6,
-                    '7 pers' => 7,
-                    '8 pers' => 8,
-                    '9 pers' => 9,
-                    '10 pers' => 10,
+                    '1 ' => 1,
+                    '2 ' => 2,
+                    '3 ' => 3,
+                    '4 ' => 4,
+                    '5 ' => 5,
+                    '6 ' => 6,
+                    '7 ' => 7,
+                    '8 ' => 8,
+                    '9 ' => 9,
+                    '10 ' => 10,
                 ],
                 'placeholder' => 'Choisissez le nombre de personnes',
                 'required' => true,

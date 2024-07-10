@@ -3,6 +3,127 @@
 {% block title %}FAQ{% endblock %}
 
 {% block body %}
-<h1>FAQ</h1>
-<p>Bienvenue sur la page des questions fréquemment posées (FAQ). Ici, vous trouverez des réponses aux questions les plus courantes.</p>
+<section class="faq-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="mb-4">FAQ - Foire Aux Questions</h2>
+
+                <div class="accordion" id="faqAccordion">
+
+                    <!-- Question 1 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="question1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#answer1" aria-expanded="true" aria-controls="answer1">
+                                Quels types d'activités sportives proposez-vous ?
+                            </button>
+                        </h3>
+                        <div id="answer1" class="accordion-collapse collapse" aria-labelledby="question1"
+                            data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Nous proposons une variété d'activités sportives telles que la randonnée, le VTT,
+                                l'escalade, le kayak et bien plus encore. Consultez notre catalogue pour plus de détails.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="question2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#answer2" aria-expanded="false" aria-controls="answer2">
+                                Comment puis-je m'inscrire à une excursion ou à un événement sportif ?
+                            </button>
+                        </h3>
+                        <div id="answer2" class="accordion-collapse collapse" aria-labelledby="question2"
+                            data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Vous pouvez vous inscrire en remplissant le formulaire d'inscription disponible sur
+                                notre site web ou en nous contactant par téléphone ou par email.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="question3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#answer3" aria-expanded="false" aria-controls="answer3">
+                                Quelles sont les destinations principales pour vos voyages découvertes ?
+                            </button>
+                        </h3>
+                        <div id="answer3" class="accordion-collapse collapse" aria-labelledby="question3"
+                            data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Nous organisons des voyages découvertes dans des destinations variées telles que les
+                                montagnes, les déserts, les forêts tropicales, etc. Chaque destination offre des
+                                expériences uniques.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="question4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#answer4" aria-expanded="false" aria-controls="answer4">
+                                Est-il nécessaire d'avoir une expérience préalable pour participer à vos activités ?
+                            </button>
+                        </h3>
+                        <div id="answer4" class="accordion-collapse collapse" aria-labelledby="question4"
+                            data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Certaines de nos activités sont accessibles aux débutants avec des guides
+                                expérimentés pour vous accompagner. D'autres peuvent nécessiter un niveau de
+                                compétence spécifique. Consultez les détails de chaque activité pour plus
+                                d'informations.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="question5">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#answer5" aria-expanded="false" aria-controls="answer5">
+                                Quels équipements dois-je apporter pour une excursion ?
+                            </button>
+                        </h3>
+                        <div id="answer5" class="accordion-collapse collapse" aria-labelledby="question5"
+                            data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Les équipements nécessaires varient en fonction de l'activité. En général, nous
+                                recommandons d'apporter des vêtements confortables, des chaussures adaptées,
+                                de l'eau, et éventuellement des équipements spécifiques comme un sac à dos,
+                                une lampe frontale, etc. Des détails spécifiques seront fournis pour chaque
+                                excursion.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="question6">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#answer6" aria-expanded="false" aria-controls="answer6">
+                                Comment puis-je annuler ma réservation ?
+                            </button>
+                        </h3>
+                        <div id="answer6" class="accordion-collapse collapse" aria-labelledby="question6"
+                            data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Pour annuler votre réservation, veuillez nous contacter par téléphone ou par email
+                                au moins 48 heures avant la date prévue de l'activité. Des frais d'annulation
+                                peuvent s'appliquer selon notre politique.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

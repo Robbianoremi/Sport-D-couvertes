@@ -53,6 +53,7 @@
 
     .fa {
         color: #0d6efd;
+        width: 500px;
     }
 
     .separator {
@@ -124,12 +125,7 @@
         margin-bottom: 30px;
         text-align: center;
     }
-    .activity img {
-        width: 100%; /* Ajustez la taille de l'image selon vos besoins */
-        height: auto;
-        border-radius: 5px;
-        object-fit: cover;
-    }
+   
     .activity h3 {
         margin-top: 15px;
         font-size: 1.5em;
@@ -138,3 +134,7 @@
         font-size: 1em;
         color: #6c757d;
     }
+
+    
+
+    

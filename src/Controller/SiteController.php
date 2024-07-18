@@ -39,4 +39,10 @@ class SiteController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/404', name: 'app_error404')]
+    public function error404(): Response
+    {
+        return $this->render('site/error.html.twig');
+    }
 }

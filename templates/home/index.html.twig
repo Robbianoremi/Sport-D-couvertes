@@ -6,11 +6,11 @@
 
 <div class="container-fluid text-center py-5 hero">
     <div class="overlay"></div>
-    <div class="hero-content">
-        <h1>Bienvenue sur notre site de réservation</h1>
-        <p>Réservez vos activités préférées en quelques clics et vivez des moments inoubliables</p>
-        <a href="{{ path('app_reservation') }}" class="btn btn-primary btn-lg">Voir les réservations</a>
-        <a href="{{ path('app_reservation_new') }}" class="btn btn-success btn-lg">Créer une nouvelle réservation</a>
+    <div class="hero-content mt-5">
+        <h1 class="mb-4 fw-bold">Sports & Découvertes</h1>
+        <p class="fw-semibold mb-5">"Réservez vos activités préférées en quelques clics et vivez des moments inoubliables"</p>
+        <a href="{{ path('app_reservation_new') }}" class="btn btn-success btn-lg ">Faire une réservation</a>
+        
         {% if not app.user %}
 
         {% endif %}
@@ -20,27 +20,28 @@
 
 <div class=" container-fluid text-center features py-5 px-5">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-4">
             <div class="feature">
-                <!-- <img src="{{ asset('images/facile.png') }}" alt="Facile à utiliser"> -->
+               
                 <i class=" fa fa-regular fa-thumbs-up fa-2xl"></i>
-                <h3 class="pt-3">Facile à utiliser</h3>
+                <h3 class="pt-3 fs-3">Facile à utiliser</h3>
                 <p>Réservez vos activités en toute simplicité avec notre interface intuitive.</p>
             </div>
+           
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-4">
             <div class="feature">
-                <!-- <img src="{{ asset('images/icon2.png') }}" alt="Variété d'activités"> -->
+               
                 <i class="fa fa-regular fa-heart fa-2xl"></i>
-                <h3 class="pt-3">Variété d'activités</h3>
+                <h3 class="pt-3 fs-3">Variété d'activités</h3>
                 <p>Choisissez parmi une large gamme d'activités pour tous les goûts et tous les âges.</p>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-4">
             <div class="feature">
-                <!-- <img src="{{ asset('images/icon3.png') }}" alt="Support 24/7"> -->
+                
                 <i class="fa fa-solid fa-headset fa-2xl"></i>
-                <h3 class="pt-3">Support 24/7</h3>
+                <h3 class="pt-3 fs-3">Support 24/7</h3>
                 <p>Notre équipe est disponible à tout moment pour vous assister dans vos réservations.</p>
             </div>
         </div>
@@ -50,8 +51,10 @@
 <div class="separator"></div>
 
 
-<div class="container-fluid activities py-3">
+<div class="container-fluid activities py-4">
     <div class="row">
+        <div class="h2 text-center mb-4">Activités</div>
+        <p class="mx-auto px-4 text-justify mb-5">Chez Sport et Découverte, nous offrons des sessions de coaching bien-être pour améliorer la forme physique et mentale, ainsi que diverses découvertes et animations comme la randonnée pédestre et le kayaking. Nos activités sont conçues pour offrir à tous une opportunité de se divertir, se challenger et découvrir de nouvelles passions dans un cadre convivial et sécurisé.</p>
         <div class="col-lg-3 ">
             <div class="activity bg-light pb-3 rounded border shadow">
                 <img src="{{ asset('images/photos/coaching.jpg') }}" class="img-fluid " alt="Activité 1">
